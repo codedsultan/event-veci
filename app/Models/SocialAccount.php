@@ -10,6 +10,6 @@ class SocialAccount extends Model
 
     public function user()
     {
-        return $this->belongs('App\User');
+        return $this->belongs('App\Models\User');
     }
 }

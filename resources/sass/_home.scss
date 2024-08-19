@@ -1,0 +1,23 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0 ;
+    box-sizing: border-box ;
+}
+
+$bp-largest:75em; //1200px
+$bp-large:62.5em; //1000px
+$bp-medium:50em;  //800px
+$bp-small:36em;
+
+html {
+    //box-sizing: border-box !important;
+     //min-height: 100% !important;
+    //font-size: 62.5% !important; //1rem=10px 10/16px=62.5%;
+    
+      @media only screen and (max-width:$bp-medium){
+        font-size: 80% !important;
+     }
+    
+ }

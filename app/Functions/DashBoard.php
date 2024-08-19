@@ -5,7 +5,7 @@ namespace App\Functions;
 use App\Event;
 use App\PurchaseTicket;
 use App\Topic;
-use App\User;
+use App\Models\User;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;

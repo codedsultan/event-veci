@@ -3,7 +3,7 @@
 namespace App\Functions;
 
 use App\PurchaseTicket;
-use App\User;
+use App\Models\User;
 use Carbon\Carbon;
 
 class DateFunctions
