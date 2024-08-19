@@ -6,7 +6,7 @@ return[
         'secret'=>env('RECAPTCHA_SECRET')
     ],
     'adminstrators'=>[
-        'mbeatty@example.net',
+        'codesultan369@gmail.com',
 
     ],
     'pagination'=>[

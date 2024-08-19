@@ -19,7 +19,11 @@ class Event extends Model implements Searchable
     use SoftDeletes;
     use HasFactory;
 
-    protected $dates = ['deleted_at', 'strtdt', 'enddt'];
+    protected $casts = [
+        'deleted_at' => 'date',
+        'strtdt' => 'date',
+        'enddt' => 'date',
+    ];
 
     protected $guarded = [];
 

@@ -24,7 +24,7 @@
 
 
 <!-- Compiled and minified JavaScript -->
-          @yield('javascript')
+          <!-- @yield('javascript') -->
            <script>
     window.App={!! json_encode([
                 'csrfToken'=>csrf_token(),
@@ -43,9 +43,10 @@
     <!-- Styles -->
 
     <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
-    @vite(['resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-     <link rel="stylesheet" href="{{asset('css/iziToast.min.css')}}">
+
+     <!-- <link rel="stylesheet" href="{{asset('css/iziToast.min.css')}}"> -->
 
         <!-- Styles -->
         <style>
@@ -140,7 +141,7 @@
                               </template>
                             <div class="vue-dropdown_up">
                             @if(Auth::user()->isAdmin())
-                                <a class="vue-dropdown_item_list" href="/dream-dashboard"><i class="fab fa-dashcube"></i><b> Dashboard</b></a>
+                                <a class="vue-dropdown_item_list" href="/eventx-dashboard"><i class="fab fa-dashcube"></i><b> Dashboard</b></a>
                             @endif
                                 <a class="vue-dropdown_item_list" href="/profile/{{ Auth::user()->id }}"><i class="fas fa-user"></i> <b>My Profile</b></a>
                                 <a href="/myevents" class="vue-dropdown_item_list"><i class="fas fa-cogs"></i><b>My Events</b></a>
