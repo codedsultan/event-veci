@@ -1,18 +1,39 @@
 // import 'bootstrap';
-import * as bootstrap from 'bootstrap'
+// import * as bootstrap from 'bootstrap'
 // Import our custom CSS
-import '../sass/app.scss'
+// import '../sass/app.scss'
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
+import * as Popper from '@popperjs/core'
 
 import axios from 'axios';
+// import { createApp } from 'vue';
+// import authorizations from './authorizations';
 window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+// let token = document.head.querySelector('meta[name="csrf-token"]');
 
+// if (token) {
+//     window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+// } else {
+//     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+// }
+// const app = createApp(App);
+// app.config.globalProperties.$authorize = function (...params) {
+//     if (!window.App.signedIn) return false;
+
+//     if (typeof params[0] === 'string') {
+//       return authorizations[params[0]](params[1]);
+//     }
+
+//     return params[0](window.App.user);
+//   };
+
+//   app.config.globalProperties.$signedIn = window.App.signedIn;
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -35,4 +56,4 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     enabledTransports: ['ws', 'wss'],
 // });
 
-
+window.Popper = Popper

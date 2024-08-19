@@ -11,7 +11,8 @@
 
     <!-- Scripts -->
     <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
-    @vite(['resources/js/app.js'])
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+
 
          <script>
     window.App={!! json_encode([
@@ -29,9 +30,9 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
 
-    <link rel="shortcut icon" type="image/png" href="{{asset('img/Dream.png')}}">
+    <!-- <link rel="shortcut icon" type="image/png" href="{{asset('img/Dream.png')}}"> -->
 
 
 </head>
@@ -47,21 +48,21 @@
                    <a href="/"><img src="{{asset('img/Dream.png')}}"alt=""></a>
                 <ul class="panel-list">
                   @if(Auth::user() && Auth::user()->isAdmin())
-                   <router-link to="/dream-dashboard" class="panel-list_item">
+                   <router-link to="/eventx-dashboard" class="panel-list_item">
                        <p><i class="fas fa-desktop desktop"></i><span> Dashboard</span></p>
-                </router-link>
-                 <router-link to="/manage-users" class="panel-list_item">
-                     <p><i class="fas fa-users-cog cog"></i><span> Manage Users </span></p>
-                </router-link>
-                 <router-link to="/manage-topics" class="panel-list_item">
-                  <p><i class="fas fa-globe-europe globe"></i><span> Manage Topics</span></p>
-                </router-link>
-                <router-link to="/manage-events" class="panel-list_item">
-                     <p><i class="far fa-calendar-check em"></i><span> Manage Events </span></p>
-                </router-link>
-                <router-link to="/manage-tickets" class="panel-list_item">
-                     <p><i class="fas fa-ticket-alt tm"></i><span> Manage Tickets </span></p>
-                </router-link>
+                    </router-link>
+                    <router-link to="/manage-users" class="panel-list_item">
+                        <p><i class="fas fa-users-cog cog"></i><span> Manage Users </span></p>
+                    </router-link>
+                    <router-link to="/manage-topics" class="panel-list_item">
+                    <p><i class="fas fa-globe-europe globe"></i><span> Manage Topics</span></p>
+                    </router-link>
+                    <router-link to="/manage-events" class="panel-list_item">
+                        <p><i class="far fa-calendar-check em"></i><span> Manage Events </span></p>
+                    </router-link>
+                    <router-link to="/manage-tickets" class="panel-list_item">
+                        <p><i class="fas fa-ticket-alt tm"></i><span> Manage Tickets </span></p>
+                    </router-link>
                 @endif
                 </ul>
                </div>
@@ -79,7 +80,7 @@
                               </template>
                             <div class="vue-dropdown_up">
                             @if(Auth::user()->isAdmin())
-                            <a class="vue-dropdown_item_list" href="/dream-dashboard"><i class="fab fa-dashcube"></i> Dashboard</a>
+                            <a class="vue-dropdown_item_list" href="/eventx-dashboard"><i class="fab fa-dashcube"></i> Dashboard</a>
                             @endif
                             <a class="vue-dropdown_item_list" href="profile/{{ Auth::user()->id }}"><i class="fas fa-user"></i> My Profile</a>
                             <a href="/myevents" class="vue-dropdown_item_list"><i class="fas fa-cogs"></i>My Events</a>
