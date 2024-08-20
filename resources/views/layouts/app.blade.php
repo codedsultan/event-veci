@@ -36,16 +36,16 @@
 
 
 </head>
-<body>
-   <div id="nav"></div>
-   <div id="show"></div>
-    <div id="app">
+<body id="app">
+   <!-- <div id="nav"></div>
+   <div id="show"></div> -->
+    <div >
         <main class="">
            <div class="container-fluid">
            <div class="row">
            <div class="col-md-3 text-center">
                <div class="panel">
-                   <a href="/"><img src="{{asset('img/Dream.png')}}"alt=""></a>
+                   <a href="/"><img src="{{asset('img/logo.png')}}"alt=""></a>
                 <ul class="panel-list">
                   @if(Auth::user() && Auth::user()->isAdmin())
                    <router-link to="/eventx-dashboard" class="panel-list_item">

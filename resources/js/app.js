@@ -5,46 +5,47 @@
  */
 
 import './bootstrap';
-import '../css/app.css'
+// import '../css/app.css'
 import { createApp } from 'vue';
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
- * registering components with the application instance so they are ready
+ * registering Components with the application instance so they are ready
  * to use in your application's views. An example is included for you.
  */
 import { createRouter, createWebHistory } from 'vue-router';
 // import VueProgressBar from 'vue3-progressbar';
 import VueProgressBar from '@aacassandra/vue3-progressbar'
-import VModal from 'jenesius-vue-modal'
+// import VModal from 'jenesius-vue-modal'
 // import VModal from 'vue3-modal';
 import swal from 'sweetalert2';
 import moment from 'moment';
-import { Form, HasError, AlertError } from 'vform';
+import { Form } from 'vform';
 // import '@aacassandra/vue3-progressbar/dist/style.css'; // Import progress bar styles
 
-// Import components
-import Dropdown from './components/Dropdown.vue';
-import EditProfile from './components/EditProfile.vue';
-import AvatarForm from './components/AvatarForm.vue';
-import Recaptcha from './components/Recaptcha.vue';
-import SearchForm from './components/SearchForm.vue';
-import Events from './components/Events.vue';
-import ReplyForm from './components/Reply-Form.vue';
-import Reply from './components/Reply.vue';
-import Subscribe from './components/Subscribe.vue';
-import TicketForm from './components/TicketForm.vue';
-import DiscussionReply from './components/DiscussionReply.vue';
-import ContactForm from './components/ContactForm.vue';
-import EventFollow from './components/EventFollow.vue';
-import EventOption from './components/EventOption.vue';
-import Notifications from './components/Notifications.vue';
-import Dashboard from './components/Dashboard.vue';
-import Users from './components/Users.vue';
-import Topics from './components/Topics.vue';
-import EventsManage from './components/EventsManage.vue';
-import TicketManage from './components/TicketManage.vue';
-import Error from './components/Error.vue';
+// Import Components
+import Dropdown from './Components/Dropdown.vue';
+import EditProfile from './Components/EditProfile.vue';
+import AvatarForm from './Components/AvatarForm.vue';
+import Recaptcha from './Components/Recaptcha.vue';
+import SearchForm from './Components/SearchForm.vue';
+import Events from './Components/Events.vue';
+import ReplyForm from './Components/Reply-Form.vue';
+import Reply from './Components/Reply.vue';
+import Subscribe from './Components/Subscribe.vue';
+import TicketForm from './Components/TicketForm.vue';
+import DiscussionReply from './Components/DiscussionReply.vue';
+import ContactForm from './Components/ContactForm.vue';
+import EventFollow from './Components/EventFollow.vue';
+import EventOption from './Components/EventOption.vue';
+import Notifications from './Components/Notifications.vue';
+import Dashboard from './Components/Dashboard.vue';
+import Users from './Components/Users.vue';
+import Topics from './Components/Topics.vue';
+import EventsManage from './Components/EventsManage.vue';
+import TicketManage from './Components/TicketManage.vue';
+import Error from './Components/Error.vue';
+import ProfileDropdown from './Components/ProfileDropdown.vue';
 
 // Set up global properties and filters
 const app = createApp({
@@ -78,7 +79,12 @@ const app = createApp({
   }
 });
 
-// Register global components
+// Object.entries(import.meta.glob('./**/*.vue', { eager: true })).forEach(([path, definition]) => {
+//     app.component(path.split('/').pop().replace(/\.\w+$/, ''), definition.default);
+// });
+
+
+// Register global Components
 app.component('dropdown', Dropdown);
 app.component('edit-profile', EditProfile);
 app.component('avatar-form', AvatarForm);
@@ -94,7 +100,8 @@ app.component('contact-form', ContactForm);
 app.component('event-follow', EventFollow);
 app.component('event-option', EventOption);
 app.component('notifications', Notifications);
-app.component('pagination', require('laravel-vue-pagination').default);
+app.component('profile-dropdown', ProfileDropdown);
+// app.component('pagination', require('laravel-vue-pagination').default);
 
 // Configure Vue Router
 const routes = [
@@ -103,7 +110,7 @@ const routes = [
   { path: '/manage-topics', component: Topics },
   { path: '/manage-events', component: EventsManage },
   { path: '/manage-tickets', component: TicketManage },
-  { path: '*', component: Error }
+  { path: '/:catchAll(.*)', component: Error }
 ];
 
 const router = createRouter({
@@ -121,24 +128,24 @@ const progressBarOptions = {
 // Use plugins and mount app
 app.use(router);
 app.use(VueProgressBar, progressBarOptions);
-app.use(VModal);
+// app.use(VModal);
 
 app.mount('#app');
 
 // Create separate Vue instances for different elements if needed
-const navApp = createApp({}).use(router).mount('#nav');
-const showApp = createApp({}).use(router).mount('#show');
+// const navApp = createApp({}).use(router).mount('#nav');
+// const showApp = createApp({}).use(router).mount('#show');
 // const app = createApp({});
 
-// import ExampleComponent from './components/ExampleComponent.vue';
+// import ExampleComponent from './Components/ExampleComponent.vue';
 // app.component('example-component', ExampleComponent);
 
 /**
  * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
+ * Vue Components. It will recursively scan this directory for the Vue
+ * Components and automatically register them with their "basename".
  *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
+ * Eg. ./Components/ExampleComponent.vue -> <example-component></example-component>
  */
 
 // Object.entries(import.meta.glob('./**/*.vue', { eager: true })).forEach(([path, definition]) => {

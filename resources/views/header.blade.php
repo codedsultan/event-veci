@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-        <link rel="shortcut icon" type="image/png" href="{{asset('img/Dream.png')}}">
+        <!-- <link rel="shortcut icon" type="image/png" href="{{asset('img/logo.png')}}"> -->
 
 
 
@@ -50,7 +50,7 @@
 
         <!-- Styles -->
         <style>
-            html, body {
+            /* html, body {
 
                 font-weight: 200;
                 height: 100vh;
@@ -97,11 +97,11 @@
 
             .m-b-md {
                 margin-bottom: 30px;
-            }
+            } */
         </style>
         @foreach($events as $event)
  <style>
-     .event:before{
+     /* .event:before{
          position: absolute;
          content:"${{$event->price}}";
          top: 0;
@@ -115,47 +115,27 @@
          color:#ffffff;
 
 
-     }
+     } */
 </style>
 
  @endforeach
     </head>
-    <body>
-       <div id="">
+    <body id="">
+       <div id="app" class="text-center">
 
-           <div class="main-navbar" id="nav">
-           <div class="main-logo">
-               <a href="/"><img src="{{asset('img/logo.png')}}"></a>
-           </div>
+           <div id="nav" class="nav mx-auto max-w-7xl">
             @if (Route::has('login'))
-                <div class="top-right links">
+                <div class="block">
                     @auth
-                        <dropdown class="float-right" v-cloak>
-                      <template v-slot:trigger>
-                               <a class="vue-dropdown-menu"><img src="{{Auth::user()->profile}}" alt="{{Auth::user()->name}}'s avatar" class="dropdown-img">
 
-                                <span class="vue-dropdown-menu_name" href="#" role="button"  aria-haspopup="true" aria-expanded="false">
-                                    <!--{{ Auth::user()->name }}-->
+                    <profile-dropdown class="float-right"  v-cloak>
+                        <template v-slot:trigger>
+
                                     {!!substr(strip_tags(Auth::user()->name ), 0, 10)!!}
-                                   </span></a>
-                              </template>
-                            <div class="vue-dropdown_up">
-                            @if(Auth::user()->isAdmin())
-                                <a class="vue-dropdown_item_list" href="/eventx-dashboard"><i class="fab fa-dashcube"></i><b> Dashboard</b></a>
-                            @endif
-                                <a class="vue-dropdown_item_list" href="/profile/{{ Auth::user()->id }}"><i class="fas fa-user"></i> <b>My Profile</b></a>
-                                <a href="/myevents" class="vue-dropdown_item_list"><i class="fas fa-cogs"></i><b>My Events</b></a>
-                              <a class="vue-dropdown_item_list" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                  <i class="fas fa-sign-out-alt"></i>  <b>{{ __('Logout') }}</b>
-                                    </a>
 
-                              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
-               </div>
-           </dropdown>
-                                       <notifications class="float-right mr-3"></notifications>
+                        </template>
+                    </profile-dropdown>
+                    <notifications class=""></notifications>
 
                     @else
                         <a href="{{ route('login') }}">Login</a>
@@ -166,4 +146,4 @@
                     @endauth
                 </div>
             @endif
-            </div>
+        </div>
