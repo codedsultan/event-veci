@@ -123,19 +123,19 @@
     <body id="">
        <div id="app" class="text-center">
 
-           <div id="nav" class="nav mx-auto max-w-7xl">
+           <div id="nav" class="flex flex-1 gap-x-4 self-stretch lg:gap-x-6 mx-auto max-w-7xl">
             @if (Route::has('login'))
-                <div class="block">
+                <div class="flex items-center gap-x-4 lg:gap-x-6">
                     @auth
-
-                    <profile-dropdown class="float-right"  v-cloak>
+                    <bell-notifications ></bell-notifications>
+                    <profile-dropdown v-cloak>
                         <template v-slot:trigger>
 
                                     {!!substr(strip_tags(Auth::user()->name ), 0, 10)!!}
 
                         </template>
                     </profile-dropdown>
-                    <notifications class=""></notifications>
+                    <!-- <notifications class=""></notifications> -->
 
                     @else
                         <a href="{{ route('login') }}">Login</a>

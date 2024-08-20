@@ -46,6 +46,8 @@ import EventsManage from './Components/EventsManage.vue';
 import TicketManage from './Components/TicketManage.vue';
 import Error from './Components/Error.vue';
 import ProfileDropdown from './Components/ProfileDropdown.vue';
+import BellNotifications from './Components/BellNotifications.vue';
+
 
 // Set up global properties and filters
 const app = createApp({
@@ -101,6 +103,8 @@ app.component('event-follow', EventFollow);
 app.component('event-option', EventOption);
 app.component('notifications', Notifications);
 app.component('profile-dropdown', ProfileDropdown);
+app.component('bell-notifications', BellNotifications);
+
 // app.component('pagination', require('laravel-vue-pagination').default);
 
 // Configure Vue Router
