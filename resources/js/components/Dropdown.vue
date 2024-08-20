@@ -1,6 +1,7 @@
 <template>
-    <div class="vue-dropdown" @click="toggleDropdown">
+    <div class="bg-white vue-dropdown" @click="toggleDropdown">
       <!-- Trigger -->
+       <!-- <p>This is the drop dropdown</p> -->
       <slot name="trigger"></slot>
 
       <!-- Menu links -->

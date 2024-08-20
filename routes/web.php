@@ -15,6 +15,7 @@ use App\Http\Controllers\Auth\SocialAccountController;
 use App\Http\Controllers\FrontEndController;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -35,3 +36,7 @@ Route::get('login/{provider}/callback', [SocialAccountController::class,'handleP
 Route::get('/profile/{user}', [UsersController::class,'show']);
 
 Route::resource('events', EventsController::class);
+
+Route::delete('/profile/{user}/notifications/{notification}', [NotificationsController::class,'destroy']);
+
+Route::get('/profile/{user}/notifications', [NotificationsController::class,'index']);
