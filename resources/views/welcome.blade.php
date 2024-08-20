@@ -1,7 +1,8 @@
 @include('header')
   <!-- Header-->
 <!-- <header class="relative mx-auto main-header" data-type="background" data-speed="7"> -->
-<section class="text-gray-600 body-font h-screen flex bg-gray-900 bg-svg-constellation-gray-100 relative">
+<!-- <section class="text-gray-600 body-font h-screen flex bg-gray-900 bg-svg-constellation-gray-100 relative"> -->
+<section class="text-gray-600 body-font h-[500px] flex bg-gray-900 bg-svg-constellation-gray-100 relative">
   <div class="container mx-auto flex px-5 py-12 items-center justify-center flex-col">
     <div class="lg:w-2/3 w-full animate-fade-in-down">
       <!-- Change the heading text -->
@@ -17,7 +18,7 @@
         Attend exciting events to meet people, you only live once, do more of what you love
     </p>
       <!-- Update the button texts and links -->
-      <a class="uppercase rounded-sm bg-red-400 font-bold text-white px-8 py-4 mx-auto mr-4 hidden md:inline"
+      <a class="uppercase rounded-sm bg-blue-400 font-bold text-white px-8 py-4 mx-auto mr-4 hidden md:inline"
         href="/fullcalender">Event Calender</a>
       <a class="uppercase rounded-sm bg-green-400 font-bold text-white px-8 py-4 mx-auto hidden md:inline"
         href="/events/create">Create An Event</a>
@@ -31,27 +32,11 @@
     </svg>
   </a>
 </section>
-
-    <!-- <div class="header_bg">
-               <div class="main-header_text-box">
-            <h1 class="heading-primary">
-                 <span class="heading-primary_sub">The Real world is calling</span>
-              </h1>
-              <p class="header-para">Attend exciting events to meet people, you only live once, do more of what you love</p>
-            <a class="btn btn-info header-btn" href="/fullcalender">Event Calender</a>
-              <a class="btn btn-info header-btn" href="/events/create">Create An Event</a>
-            <br><br><br>
-
-    </div>
-
-        </div> -->
-
-    <!-- </header> -->
-    <div id="show"></div>
+    <!-- <div id="show"></div> -->
     <div class=" mt-5  mx-auto max-w-7xl">
 
        <!-- Tranding-->
-        <p class="event-heading"><b>Trending Events</b></p>
+        <p class="text-3xl"><b>Trending Events</b></p>
         <div class="event-wrap">
          <div class="row">
            @foreach($trending as $event)
@@ -77,52 +62,31 @@
          </div>
         </div>
                  <!-- All Events-->
-        <p class="event-heading mt-5"><b>Events</b></p>
+        <p class="text-3xl mt-10"><b>Events</b></p>
         <div class="mx-auto max-w-7xl ">
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
                 @foreach($events as $event)
                     @include('event.list') <!--import event list -->
                 @endforeach
-         </div>
-        </div>
-    <div class="text-center">
-        <a href="/events" class="btn event-btn">Show All Events >></a>
-    </div>
-                   <!-- All Topics-->
-        <!-- <p class="event-heading"><b>Topics</b></p>
-        <p><b>Browse groups by topics you're interested in.</b></p>
-        <div class="event-wrap">
-        <div class="row">
-        @foreach($topics as $topic)
-      <div class="col-lg-3 col-md-4 col-sm-6 text-center">
-              <div class="mb-5">
-               <a href="topic/{{$topic->slug}}">
-                <div class="topic" style= "background-image: url('{{$topic->image}}'); background-position: center center;">
-                   </div>
-                   <div class="topic-name">{{$topic->name}}</div>
-                </a>
-          </div>
             </div>
-            @endforeach
         </div>
-        </div> -->
+        <div class="text-center">
+            <a href="/events" class="mt-8 inline-flex items-center justify-center px-2 py-4 text-sm font-light leading-6 text-white whitespace-no-wrap bg-black border border-transparent rounded-sm shadow-sm hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black">Show All Events</a>
+        </div>
+
         <div class="max-w-7xl mx-auto">
         <div class="bg-white p-6 rounded-lg">
-            <h2 class="text-lg font-semibold mb-4">Topics</h2>
+            <h2 class="text-3xl font-semibold mb-4 mt-10">Topics</h2>
             <p><b>Browse groups by topics you're interested in.</b></p>
             <div class="flex flex-wrap gap-2 mt-4">
                 @foreach($topics as $topic)
                     <a href="topic/{{$topic->slug}}" class="p-2 px-3 border-purple-800 mb-4 rounded font-medium hover:bg-transparent hover:border-purple-800 border bg-purple-400/25 text-purple-800">{{$topic->name}}</a>
                 @endforeach
-                <!-- <a href="#" class="bg-green-200 hover:bg-green-300 py-1 px-2 rounded-lg text-sm">Programming</a>
-                <a href="#" class="bg-yellow-200 hover:bg-yellow-300 py-1 px-2 rounded-lg text-sm">Web Development</a>
-                <a href="#" class="bg-indigo-200 hover:bg-indigo-300 py-1 px-2 rounded-lg text-sm">Design</a>
-                <a href="#" class="bg-purple-200 hover:bg-purple-300 py-1 px-2 rounded-lg text-sm">AI</a>
-                <a href="#" class="bg-pink-200 hover:bg-pink-300 py-1 px-2 rounded-lg text-sm">Machine Learning</a> -->
             </div>
         </div>
     </div>
-            <subscribe></subscribe>
-            </div>
+
+</div>
+<subscribe></subscribe>
 @include('footer')

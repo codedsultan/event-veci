@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-        <!-- <link rel="shortcut icon" type="image/png" href="{{asset('img/logo.png')}}"> -->
+        <link rel="shortcut icon" type="image/png" href="{{asset('/images/logo.png')}}">
 
 
 
@@ -120,30 +120,51 @@
 
  @endforeach
     </head>
-    <body id="">
-       <div id="app" class="text-center">
+    <body id="app">
+        <div class="text-center">
+            <section class="w-full px-8 text-white bg-white ">
+                <div class="container flex flex-col flex-wrap items-center justify-between py-5 mx-auto md:flex-row max-w-6xl">
+                    <div class="flex flex-col lg:w-1/6 md:flex-row">
+                        <a href="#_" class=" flex items-center mb-5 font-medium text-veci lg:w-auto lg:items-center lg:justify-center md:mb-0">
+                            <img src="./images/logo.png" alt="" class="w-48 lg:w-40">
+                            <!-- <span class="mx-auto text-xl font-black leading-none text-veci select-none">VECI<span class="text-indigo-600">.</span></span> -->
+                        </a>
+                        <!-- <nav class="flex flex-wrap items-center lg:w-3/4 float-right font-normal mb-5 text-sm md:mb-0 md:pl-8 lg:justify-center md:ml-8 md:border-l md:border-gray-200 uppercase">
+                            <a href="#_" class="mr-5 leading-6 text-gray-600 hover:text-veciprimary">Home</a>
+                            <a href="#_" class="mr-5 leading-6 text-gray-600 hover:text-veciprimary">About us</a>
+                            <a href="#_" class="mr-5 leading-6 text-gray-600 hover:text-veciprimary">Services</a>
+                            <a href="#_" class="mr-5 leading-6 text-gray-600 hover:text-veciprimary">Contact Us</a>
+                        </nav> -->
+                    </div>
+                    <!-- <div class=" flex flex-col lg:w-4/6 md:flex-row">
+                        <nav class="flex flex-wrap items-center lg:w-3/4 float-right font-normal mb-5 text-sm md:mb-0 md:pl-8 lg:justify-center md:ml-8 md:border-gray-200 uppercase">
+                            <a href="#_" class="mr-5 leading-6 text-gray-600 hover:text-veciprimary">Home</a>
+                            <a href="#_" class="mr-5 leading-6 text-gray-600 hover:text-veciprimary">About us</a>
+                            <a href="#_" class="mr-5 leading-6 text-gray-600 hover:text-veciprimary">Services</a>
+                            <a href="#_" class="mr-5 leading-6 text-gray-600 hover:text-veciprimary">Contact Us</a>
+                        </nav>
+                    </div> -->
+                    @if (Route::has('login'))
+                        <div class="flex items-center justify-end gap-x-4 lg:gap-x-6">
+                            <!-- <div class="hidden md:block items-center  lg:w-1/6 lg:justify-end uppercase"> -->
+                            @auth
+                            <bell-notifications ></bell-notifications>
+                            <profile-dropdown v-cloak>
+                                <template v-slot:trigger>
+                                            {!!substr(strip_tags(Auth::user()->name ), 0, 10)!!}
+                                </template>
+                            </profile-dropdown>
+                            <!-- <notifications class=""></notifications> -->
 
-           <div id="nav" class="flex flex-1 gap-x-4 self-stretch lg:gap-x-6 mx-auto max-w-7xl">
-            @if (Route::has('login'))
-                <div class="flex items-center gap-x-4 lg:gap-x-6">
-                    @auth
-                    <bell-notifications ></bell-notifications>
-                    <profile-dropdown v-cloak>
-                        <template v-slot:trigger>
+                            @else
+                                <a href="{{ route('login') }}">Login</a>
 
-                                    {!!substr(strip_tags(Auth::user()->name ), 0, 10)!!}
-
-                        </template>
-                    </profile-dropdown>
-                    <!-- <notifications class=""></notifications> -->
-
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
+                                @if (Route::has('register'))
+                                    <a href="{{ route('register') }}">Register</a>
+                                @endif
+                            @endauth
+                        </div>
+                    @endif
                 </div>
-            @endif
-        </div>
+            </section>
+
