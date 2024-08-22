@@ -101,7 +101,7 @@
         </style>
         @foreach($events as $event)
  <style>
-     /* .event:before{
+     .event:before{
          position: absolute;
          content:"${{$event->price}}";
          top: 0;
@@ -115,10 +115,10 @@
          color:#ffffff;
 
 
-     } */
+     }
 </style>
+@endforeach
 
- @endforeach
     </head>
     <body id="app">
         <div class="text-center">
@@ -126,7 +126,7 @@
                 <div class="container flex flex-col flex-wrap items-center justify-between py-5 mx-auto md:flex-row max-w-6xl">
                     <div class="flex flex-col lg:w-1/6 md:flex-row">
                         <a href="#_" class=" flex items-center mb-5 font-medium text-veci lg:w-auto lg:items-center lg:justify-center md:mb-0">
-                            <img src="./images/logo.png" alt="" class="w-48 lg:w-40">
+                            <img src="{{asset('/images/logo.png')}}" alt="" class="w-48 lg:w-40">
                             <!-- <span class="mx-auto text-xl font-black leading-none text-veci select-none">VECI<span class="text-indigo-600">.</span></span> -->
                         </a>
                         <!-- <nav class="flex flex-wrap items-center lg:w-3/4 float-right font-normal mb-5 text-sm md:mb-0 md:pl-8 lg:justify-center md:ml-8 md:border-l md:border-gray-200 uppercase">

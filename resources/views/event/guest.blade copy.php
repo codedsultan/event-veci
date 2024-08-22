@@ -1,4 +1,4 @@
-    <base-modal v-cloak  name="guestModal"
+     <modal v-cloak  name="guestModal"
         height="auto"
         :pivot-x="1"
         scrollable>
@@ -17,10 +17,10 @@
     </div>
  </div>
  @endforeach
-</div>
+</div>  
    @else
    <h3 class="text-center mt-5 mb-3">
-       No Event Participating guest yet
-   </h3>
-   @endif
-</base-modal>
+       No Event Participating guest yet 
+   </h3>  
+   @endif                      
+    </modal>

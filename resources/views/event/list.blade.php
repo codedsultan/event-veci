@@ -18,7 +18,7 @@
             </div> -->
 
 
-            <div class="text-center col-span-1 space-x-4 bg-white rounded-3xl mx-4 md:mx-auto border-2 border-gray-800 mt-8">
+            <div class="relative event text-center col-span-1 space-x-4 bg-white rounded-3xl mx-4 md:mx-auto border-2 border-gray-800 mt-8">
                 <div class="px-8 py-6 md:p-10">
                 <a href="{{$event->path()}}">
                     <h1 class="text-4xl md:text-2xl max-w-[200px] font-medium leading-tight text-gray-800 mb-6">{{$event->name}}</h1>

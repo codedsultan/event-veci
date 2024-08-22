@@ -1,53 +1,85 @@
 <template>
     <div>
-      <p><button class="btn event-btn float-right" @click="showModal">Attend Event</button></p>
+      <button @click="showModal = true" class="px-4 py-2 bg-blue-500 text-white rounded">Attend Event</button>
 
-      <modal name="ticketModal" height="auto" width="60%" :click-to-close="false" transition="ease" :adaptive="true">
-        <div class="row" v-if="qty > 0">
-          <div class="col-md-7">
-            <form class="reply-form">
-              <h4>{{ event.name }}</h4>
-              <p><b>Per Ticket Price: ${{ price }}</b></p>
-              <p>
-                <span><b>Select Quantity:</b></span>
-                <br>
-                <button class="btn btn-primary btn-sm" @click.prevent="decr" :disabled="selectedqty === 0">-</button>
-                <button class="btn btn-primary btn-sm" @click.prevent="decr" v-show="selectedqty > 0">-</button>
-                <input type="text" name="selectedqty" v-model="selectedqty" readonly class="text-center ticket-input">
-                <button class="btn btn-primary btn-sm" @click.prevent="incr" :disabled="qty <= 0">+</button>
-                <button class="btn btn-primary btn-sm" @click.prevent="incr" v-show="qty > 0">+</button>
-              </p>
-              <p><b>Quantity Left: <span>{{ qty }}</span></b></p>
-              <p><b>Total Price: $<span>{{ selectedprice }}</span></b></p>
-            </form>
-          </div>
-          <div class="col-md-5">
-            <h4 class="mt-5 mb-3">Purchase Ticket</h4>
-            <form class="mb-3">
-              <input type="hidden" name="stripeToken" v-model="stripeToken">
-              <input type="hidden" name="stripeEmail" v-model="stripeEmail">
-              <button class="btn btn-sm btn-success" @click.prevent="buy" :disabled="selectedqty === 0"><b>Purchase</b></button>
-            </form>
-            <p>*Policy: Purchased ticket cannot be refunded</p>
-            <h3 class="text-success" v-show="process">Hang on, your payment is in process</h3>
-          </div>
+      <base-modal :visible="showModal" @update:visible="showModal = $event" title="Purchase Event Ticket">
+      <div>
+    <!-- Display if quantity is available -->
+    <div v-if="qty > 0" class="text-center p-6">
+      <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
+        <h4 class="text-2xl font-semibold mb-4">{{ event.name }}</h4>
+        <p class="text-lg mb-4"><b>Per Ticket Price: ${{ price }}</b></p>
+
+        <div class="flex items-center justify-center space-x-4 mb-4">
+          <button
+            class="px-4 py-2 bg-blue-500 text-white rounded-md shadow-sm hover:bg-blue-600 disabled:opacity-50"
+            @click.prevent="decr"
+            :disabled="selectedqty === 0"
+          >
+            -
+          </button>
+          <input
+            type="text"
+            name="selectedqty"
+            v-model="selectedqty"
+            readonly
+            class="w-16 text-center border border-gray-300 rounded-md py-2"
+          />
+          <button
+            class="px-4 py-2 bg-blue-500 text-white rounded-md shadow-sm hover:bg-blue-600 disabled:opacity-50"
+            @click.prevent="incr"
+            :disabled="qty <= 0"
+          >
+            +
+          </button>
         </div>
-        <div v-else class="mt-5 mb-5 ml-5">
-          <h3>Sorry! Event Ticket Sold Out</h3>
-          <p><b>*We will update event tickets if more quantity becomes available</b></p>
+
+        <p class="text-lg mb-4"><b>Quantity Left: <span>{{ qty }}</span></b></p>
+        <p class="text-lg mb-6"><b>Total Price: $<span>{{ selectedprice }}</span></b></p>
+
+        <div class="bg-gray-50 p-4 rounded-md shadow-inner">
+          <h4 class="text-xl font-semibold mb-4">Purchase Ticket</h4>
+          <form class="space-y-4">
+            <input type="hidden" name="stripeToken" v-model="stripeToken">
+            <input type="hidden" name="stripeEmail" v-model="stripeEmail">
+            <button
+              class="px-6 py-2 bg-green-500 text-white rounded-md shadow-sm hover:bg-green-600 disabled:opacity-50"
+              @click.prevent="buy"
+              :disabled="selectedqty === 0"
+            >
+              Purchase
+            </button>
+          </form>
+          <p class="text-sm text-gray-600 mt-2">*Policy: Purchased ticket cannot be refunded</p>
+          <h3 class="text-green-500 mt-4" v-if="process">Hang on, your payment is in process</h3>
         </div>
-        <p class="float-right mr-3">
-          <button class="btn btn-danger" @click.prevent="hideModal">Close</button>
-        </p>
-      </modal>
+      </div>
     </div>
-  </template>
 
+    <!-- Display if quantity is not available -->
+    <div v-else class="mt-6 p-6 bg-white rounded-lg shadow-md text-center">
+      <h3 class="text-2xl font-semibold mb-2">Sorry! Event Ticket Sold Out</h3>
+      <p class="text-lg text-gray-600"><b>*We will update event tickets if more quantity becomes available</b></p>
+    </div>
+
+    <!-- Close button -->
+    <p class="text-right mt-4">
+      <button
+        class="px-4 py-2 bg-red-500 text-white rounded-md shadow-sm hover:bg-red-600"
+        @click="showModal = false"
+      >
+        Close
+      </button>
+    </p>
+  </div>
+      </base-modal>
+    </div>
+</template>
   <script setup>
   import { ref, watch, onMounted } from 'vue';
   import axios from 'axios';
   import swal from 'sweetalert2';
-
+  import BaseModal from '@/Components/BaseModal.vue';
   // Props
   const props = defineProps({
     event: Object
@@ -61,7 +93,7 @@
   const stripeEmail = ref('');
   const stripeToken = ref('');
   const process = ref(false);
-
+  const showModal = ref(false);
   // Stripe configuration
   let stripe;
 
@@ -107,15 +139,15 @@
   });
 
   // Methods
-  const showModal = () => {
-    // Function to show the modal
-    $modal.show('ticketModal');
-  };
+//   const showModal = () => {
+//     // Function to show the modal
+//     $modal.show('ticketModal');
+//   };
 
-  const hideModal = () => {
-    // Function to hide the modal
-    $modal.hide('ticketModal');
-  };
+//   const hideModal = () => {
+//     // Function to hide the modal
+//     $modal.hide('ticketModal');
+//   };
 
   const incr = () => {
     if (qty.value > 0) {
@@ -134,6 +166,7 @@
   };
 
   const buy = () => {
+    //integrate with backend
     stripe.open({
       name: props.event.name,
       description: `Purchased Ticket: ${selectedqty.value}`,
