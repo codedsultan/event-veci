@@ -1,9 +1,30 @@
 <template>
-    <div class="py-4 flex justify-between">
+    <div class="py-2 bg-white">
+    <p class="text-xl font-semibold text-gray-800 flex justify-between items-center">
+        About this event
+        <span v-if="true" class="ml-4">
+        <!-- <span v-if="signedIn" class="ml-4"> -->
+            <button
+                v-if="button.active"
+                class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400"
+                @click.prevent="UnFollow"
+            >
+                Unfollow Event
+            </button>
+            <button
+                v-else
+                class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                @click.prevent="Follow"
+            >
+                Follow Event
+            </button>
+        </span>
+    </p>
+</div>
+    <!-- <div class="py-4 flex justify-between">
       <p class="text-left py-2">
         About this event
         </p>
-        <!-- <span v-if="signedIn"> -->
         <div>
         <span  >
           <button
@@ -22,7 +43,7 @@
           </button>
         </span>
         </div>
-    </div>
+    </div> -->
   </template>
   <script setup>
   import { ref, defineProps } from 'vue';
