@@ -47,6 +47,13 @@ import TicketManage from './Components/TicketManage.vue';
 import Error from './Components/Error.vue';
 import ProfileDropdown from './Components/ProfileDropdown.vue';
 import BellNotifications from './Components/BellNotifications.vue';
+import Accordion from './Components/Accordion.vue';
+import AccordionButton from './Components/AccordionButton.vue';
+import BaseModal from './Components/BaseModal.vue';
+import ScrollableModal from './Components/ScrollableModal.vue';
+import EventGuests from './Components/EventGuests.vue';
+
+
 
 
 // Set up global properties and filters
@@ -54,7 +61,9 @@ const app = createApp({
   data() {
     return {
       swal: swal,
-      Form: Form
+      Form: Form,
+    //   showModal: false
+
     };
   },
   methods: {
@@ -104,6 +113,14 @@ app.component('event-option', EventOption);
 app.component('notifications', Notifications);
 app.component('profile-dropdown', ProfileDropdown);
 app.component('bell-notifications', BellNotifications);
+app.component('accordion', Accordion);
+app.component('accordion-button', AccordionButton);
+app.component('base-modal', BaseModal);
+app.component('scrollable-modal', ScrollableModal);
+app.component('event-guests', EventGuests);
+
+
+
 
 // app.component('pagination', require('laravel-vue-pagination').default);
 

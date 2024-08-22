@@ -1,24 +1,27 @@
 <template>
-    <div>
-      <p class="single-event_detail-heading">
+    <div class="py-4 flex justify-between">
+      <p class="text-left py-2">
         About this event
-        <span v-if="signedIn">
+        </p>
+        <!-- <span v-if="signedIn"> -->
+        <div>
+        <span  >
           <button
             v-if="button.active"
-            class="btn follow-btn float-right"
+            class="px-6 py-2 min-w-[120px] text-center text-violet-600 border border-violet-600 rounded hover:bg-violet-600 hover:text-white active:bg-indigo-500 focus:outline-none focus:ring float-right"
             @click.prevent="unfollowEvent"
           >
             UnFollow Event
           </button>
           <button
             v-else
-            class="btn header-btn float-right"
+            class="px-6 py-2 min-w-[120px] text-center text-violet-600 border border-violet-600 rounded hover:bg-violet-600 hover:text-white active:bg-indigo-500 focus:outline-none focus:ring float-right"
             @click.prevent="followEvent"
           >
             Follow Event
           </button>
         </span>
-      </p>
+        </div>
     </div>
   </template>
   <script setup>
