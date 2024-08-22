@@ -52,6 +52,11 @@ import AccordionButton from './Components/AccordionButton.vue';
 import BaseModal from './Components/BaseModal.vue';
 import ScrollableModal from './Components/ScrollableModal.vue';
 import EventGuests from './Components/EventGuests.vue';
+import DiscussionModal from './Components/DiscussionModal.vue';
+import ReplyModal from './Components/ReplyModal.vue';
+import EditReplyModal from './Components/EditReplyModal.vue';
+import DiscussReply from './Components/DiscussReply.vue';
+import AllReplies from './Components/AllReplies.vue';
 
 
 
@@ -118,6 +123,13 @@ app.component('accordion-button', AccordionButton);
 app.component('base-modal', BaseModal);
 app.component('scrollable-modal', ScrollableModal);
 app.component('event-guests', EventGuests);
+app.component('discussion-modal', DiscussionModal);
+app.component('discuss-reply', DiscussReply);
+app.component('edit-reply-modal', EditReplyModal);
+app.component('reply-modal', ReplyModal);
+app.component('all-replies', AllReplies);
+
+
 
 
 
