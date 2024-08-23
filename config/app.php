@@ -108,6 +108,7 @@ return [
     ],
     'aliases' => Facade::defaultAliases()->merge([
         'Redis' => Illuminate\Support\Facades\Redis::class,
+        // 'Image' => Intervention\Image\Facades\Image::class
     ])->toArray(),
 
     /*

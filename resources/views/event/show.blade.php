@@ -33,7 +33,7 @@
                     @if($replies->count() > 0)
                     @foreach ($replies as $reply)
 
-                    <disscuss-reply></disscuss-reply>
+                    <discuss-reply :replys="{{$reply}}"></discuss-reply>
                     @include('event.allreplies')
                     @endforeach
                     @else

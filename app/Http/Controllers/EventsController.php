@@ -161,7 +161,7 @@ class EventsController extends Controller
     {
         $trending->push($event);
         $events = Event::orderBy('created_at', 'desc')->paginate(8);
-        $replies = $event->replies()->paginate(config('dream.pagination.perPage'));
+        $replies = $event->replies()->with(['user','discussionreplies'])->paginate(config('dream.pagination.perPage'));
         $related_events = Event::where('topic_id', '=', $event->topic->id)
             ->where('id', '!=', $event->id)
             ->paginate(4);

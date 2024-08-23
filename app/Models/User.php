@@ -3,6 +3,9 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Actions\CreateAvatar;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -47,9 +50,9 @@ class User extends Authenticatable
     }
 
 
-    protected $appends = ['isAdmin', 'profile'];
+    protected $appends = ['isAdmin', 'profile','gravatar'];
 
-
+    // protected $appends = ['avatar', 'country_name'];
 
     /**
      * The attributes that should be cast to native types.
@@ -167,6 +170,11 @@ class User extends Authenticatable
     public function getisAdminAttribute()
     {
         return $this->isAdmin();
+    }
+
+    public function gravatar(): Attribute
+    {
+        return Attribute::get(fn () => CreateAvatar::run($this->first_name, $this->email, null, null, 'lorelei'));
     }
 }
 
