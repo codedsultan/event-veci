@@ -1,10 +1,8 @@
 <template>
+    <!-- <button v-if="true" @click="openModal" class="text-blue-500 hover:underline">Reply</button> -->
+    <button v-if="true" @click="openModal" class="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">Edit</button>
     <BaseModal
-      v-if="isModalOpen"
-      @close="closeModal"
-      class="p-6 max-w-lg mx-auto bg-white rounded-lg shadow-lg"
-      :width="'60%'"
-      :height="'auto'"
+      :visible="showModal" @update:visible="showModal = $event"
     >
       <form @submit.prevent="handleSubmit" class="space-y-4">
         <!-- Header Content -->
@@ -52,6 +50,7 @@
   <script setup>
   import { ref, watch } from 'vue';
   import BaseModal from '@/Components/BaseModal.vue';
+// import { openModal } from 'jenesius-vue-modal';
   // Props
   const props = defineProps({
     reply: Object,
@@ -60,7 +59,7 @@
 
   // Emits
   const emit = defineEmits(['update:isModalOpen', 'updateReply']);
-
+  const showModal = ref(false);
   // Reactive state
   const body = ref(props.reply?.body || '');
   const submitted = ref(false);
@@ -70,6 +69,10 @@
     body.value = newReply?.body || '';
   });
 
+  function openModal() {
+    console.log('here')
+    showModal.value = true;
+  }
   // Methods
   function closeModal() {
     emit('update:isModalOpen', false);

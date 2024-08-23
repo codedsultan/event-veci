@@ -27,8 +27,8 @@
 
   <script setup>
   import { computed } from 'vue';
-  import BaseModal from '@/components/BaseModal.vue'; // Adjust the import path as needed
-  import DiscussionReply from '@/components/DiscussionReply.vue'; // Adjust the import path as needed
+  import BaseModal from '@/Components/BaseModal.vue'; // Adjust the import path as needed
+  import DiscussionReply from '@/Components/DiscussionReply.vue'; // Adjust the import path as needed
 
   // Props
   const props = defineProps({

@@ -1,5 +1,6 @@
 <template>
-    <BaseModal v-if="isModalOpen" class="fixed inset-0 flex items-center justify-center z-50 overflow-auto bg-black bg-opacity-50">
+    <button v-if="true" @click="openModal" class="text-blue-500 hover:underline">Reply</button>
+    <BaseModal :visible="showModal" @update:visible="showModal = $event" >
       <div class="bg-white rounded-lg shadow-lg w-full max-w-3xl mx-4 md:mx-0 p-6 relative">
         <!-- Close Button -->
         <button @click="closeModal" class="absolute top-3 right-3 text-gray-500 hover:text-gray-700">
@@ -57,7 +58,7 @@
     reply: Object,
     isModalOpen: Boolean
   });
-
+  const showModal = ref(false);
   // Emits
   const emit = defineEmits(['update:isModalOpen', 'replyUpdated']);
 
@@ -66,7 +67,10 @@
     replybody: ''
   });
   const submitted = ref(false);
-
+  function openModal() {
+    console.log('here')
+    showModal.value = true;
+  }
   // Watch for changes in reply prop
   watch(() => props.reply, (newReply) => {
     form.value.replybody = newReply?.body || '';
