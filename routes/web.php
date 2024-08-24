@@ -37,8 +37,13 @@ Route::get('login/{provider}/callback', [SocialAccountController::class,'handleP
 
 //profile routes
 Route::get('/profile/{user}', [UsersController::class,'show']);
+Route::get('myevents', [UsersController::class,'myevents'])->name('myevents');
+Route::patch('/profile/{user}',[UsersController::class,'update']);
 
 Route::resource('events', EventsController::class);
+Route::get('/events/{event}/delete', [EventsController::class,'delete']);
+Route::get('/events/{event}/draftdelete', [EventsController::class,'draftdelete']);
+Route::get('/events/{event}/undrafted', [EventsController::class,'undrafted']);
 
 Route::delete('/profile/{user}/notifications/{notification}', [NotificationsController::class,'destroy']);
 
