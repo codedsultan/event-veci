@@ -15,6 +15,7 @@ use App\Http\Controllers\Auth\SocialAccountController;
 use App\Http\Controllers\DiscussionReplyController;
 use App\Http\Controllers\FrontEndController;
 use App\Http\Controllers\EventsController;
+use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\ReplyController;
@@ -59,6 +60,8 @@ Route::delete('/discussionreply/{discussionreply}', 'DiscussionReplyController@d
 Route::prefix('events/{event}')->group(function () {
     Route::get('replies', [ReplyController::class, 'index'])->name('replies.index');
     Route::post('replies', [ReplyController::class, 'store'])->name('replies.store');
+    Route::post('follow', [FollowerController::class,'follow'])->name('event.follow');
+    Route::delete('follow', [FollowerController::class,'unfollow'])->name('event.unfollow');
 });
 
 Route::prefix('replies/{reply}')->group(function () {
@@ -74,3 +77,7 @@ Route::prefix('discussion')->group(function () {
         Route::delete('/', [DiscussionReplyController::class, 'destroy'])->name('discussionreplies.destroy');
     });
 });
+
+
+// Route::post('/events/{event}/follow', 'FollowerController@follow');
+// Route::delete('/events/{event}/follow', 'FollowerController@unfollow');
