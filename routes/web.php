@@ -86,3 +86,4 @@ Route::prefix('discussion')->group(function () {
 
 // Route::post('/events/{event}/follow', 'FollowerController@follow');
 // Route::delete('/events/{event}/follow', 'FollowerController@unfollow');
+Route::post('/subscribe', [FrontEndController::class,'subscribe']);

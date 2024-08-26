@@ -129,12 +129,32 @@
                             <img src="{{asset('/images/logo.png')}}" alt="" class="w-48 lg:w-40">
                             <!-- <span class="mx-auto text-xl font-black leading-none text-veci select-none">VECI<span class="text-indigo-600">.</span></span> -->
                         </a>
+
                         <!-- <nav class="flex flex-wrap items-center lg:w-3/4 float-right font-normal mb-5 text-sm md:mb-0 md:pl-8 lg:justify-center md:ml-8 md:border-l md:border-gray-200 uppercase">
                             <a href="#_" class="mr-5 leading-6 text-gray-600 hover:text-veciprimary">Home</a>
                             <a href="#_" class="mr-5 leading-6 text-gray-600 hover:text-veciprimary">About us</a>
                             <a href="#_" class="mr-5 leading-6 text-gray-600 hover:text-veciprimary">Services</a>
                             <a href="#_" class="mr-5 leading-6 text-gray-600 hover:text-veciprimary">Contact Us</a>
                         </nav> -->
+                    </div>
+                    <div class="flex flex-wrap">
+                        @if(Auth::user() && Auth::user()->isAdmin())
+                            <router-link to="/eventx-dashboard" class="px-3 py-1 text-sm leading-6 text-gray-900">
+                                <p><i class="fas fa-desktop desktop"></i><span> Dashboard</span></p>
+                            </router-link>
+                            <router-link to="/manage-users" class="px-3 py-1 text-sm leading-6 text-gray-900">
+                                <p><i class="fas fa-users-cog cog"></i><span> Manage Users </span></p>
+                            </router-link>
+                            <router-link to="/manage-topics" class=" px-3 py-1 text-sm leading-6 text-gray-900">
+                            <p><i class="fas fa-globe-europe globe"></i><span> Manage Topics</span></p>
+                            </router-link>
+                            <router-link to="/manage-events" class=" px-3 py-1 text-sm leading-6 text-gray-900">
+                                <p><i class="far fa-calendar-check em"></i><span> Manage Events </span></p>
+                            </router-link>
+                            <router-link to="/manage-tickets" class=" px-3 py-1 text-sm leading-6 text-gray-900">
+                                <p><i class="fas fa-ticket-alt tm"></i><span> Manage Tickets </span></p>
+                            </router-link>
+                        @endif
                     </div>
                     <!-- <div class=" flex flex-col lg:w-4/6 md:flex-row">
                         <nav class="flex flex-wrap items-center lg:w-3/4 float-right font-normal mb-5 text-sm md:mb-0 md:pl-8 lg:justify-center md:ml-8 md:border-gray-200 uppercase">
@@ -152,15 +172,37 @@
                             <profile-dropdown v-cloak>
                                 <template v-slot:trigger>
                                             {!!substr(strip_tags(Auth::user()->name ), 0, 10)!!}
+
+                                </template>
+
+                                <template v-slot:items>
+
+                                            @if(Auth::user()->isAdmin())
+                                            <!-- <MenuItem  v-slot=""> -->
+                                                <a href="/eventx-dashboard" class="block px-3 py-1 text-sm leading-6 text-gray-900"><i class="fab fa-dashcube"></i> Dashboard</a>
+                                            <!-- </MenuItem> -->
+                            <!-- <a class="vue-dropdown_item_list" href="/eventx-dashboard"><i class="fab fa-dashcube"></i> Dashboard</a> -->
+                            @endif
+
+                            <a class="block px-3 py-1 text-sm leading-6 text-gray-900" href="profile/{{ Auth::user()->id }}"><i class="fas fa-user"></i> My Profile</a>
+                            <a href="/myevents" class="block px-3 py-1 text-sm leading-6 text-gray-900"><i class="fas fa-cogs"></i>My Events</a>
+                             <a class="block px-3 py-1 text-sm leading-6 text-gray-900" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                      <i class="fas fa-sign-out-alt"></i>  {{ __('Logout') }}
+                                    </a>
+
+                              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
                                 </template>
                             </profile-dropdown>
                             <!-- <notifications class=""></notifications> -->
 
                             @else
-                                <a href="{{ route('login') }}">Login</a>
+                                <a href="{{ route('login') }}" class="text-gray-900">Login</a>
 
                                 @if (Route::has('register'))
-                                    <a href="{{ route('register') }}">Register</a>
+                                    <a href="{{ route('register') }}" class="text-gray-900">Register</a>
                                 @endif
                             @endauth
                         </div>

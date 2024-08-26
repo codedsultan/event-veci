@@ -68,6 +68,7 @@
                </div>
               </div>
            <div class="col-md-9 main-bg">
+
            @if(Auth::user())
            <dropdown class="float-right" v-cloak>
                       <template v-slot:trigger>
