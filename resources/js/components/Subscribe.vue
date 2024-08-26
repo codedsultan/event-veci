@@ -39,7 +39,7 @@
 
     try {
       // Post the subscription data
-      await axios.post('/subscribe', { email: form.value.subscriber });
+      await axios.post('/subscribe', { subscriber: form.value.subscriber });
       swal.fire('Success!', 'You have successfully subscribed to our newsletter.', 'success');
       // Clear the form field after successful subscription
       form.value.subscriber = '';
