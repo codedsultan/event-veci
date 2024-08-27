@@ -51,16 +51,14 @@ Route::get('/profile/{user}/notifications', [NotificationsController::class,'ind
 
 // reply
 
-Route::get('/events/{event}/replies', 'ReplyController@index');
+Route::get('/events/{event}/replies', [ReplyController::class, 'index']);
+Route::post('/events/{event}/replies', [ReplyController::class, 'store']);
+Route::patch('/replies/{reply}', [ReplyController::class, 'update']);
+Route::delete('/replies/{reply}', [ReplyController::class, 'destroy']);
 
-Route::post('/events/{event}/replies', 'ReplyController@store');
-
-Route::patch('/replies/{reply}', 'ReplyController@update');
-
-Route::delete('/replies/{reply}', 'ReplyController@destroy');
-Route::post('/discussion/{reply}', 'DiscussionReplyController@store');
-Route::patch('/discussionreply/{discussionreply}', 'DiscussionReplyController@update');
-Route::delete('/discussionreply/{discussionreply}', 'DiscussionReplyController@destroy');
+Route::post('/discussion/{reply}', [DiscussionReplyController::class, 'store']);
+Route::patch('/discussionreply/{discussionreply}', [DiscussionReplyController::class, 'update']);
+Route::delete('/discussionreply/{discussionreply}', [DiscussionReplyController::class, 'destroy']);
 
 Route::prefix('events/{event}')->group(function () {
     Route::get('replies', [ReplyController::class, 'index'])->name('replies.index');

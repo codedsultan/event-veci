@@ -13,7 +13,7 @@
                     <p class="text-justify">{!! $event->desc !!}</p>
                 </div> -->
                 <div class="bg-white p-6 rounded-lg shadow-md">
-                    <img src="https://images.unsplash.com/photo-1606857521015-7f9fcf423740?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1344&h=1104&q=80" alt="" class="w-full h-auto rounded-t-lg mb-4" />
+                    <!-- <img src="https://images.unsplash.com/photo-1606857521015-7f9fcf423740?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1344&h=1104&q=80" alt="" class="w-full h-auto rounded-t-lg mb-4" /> -->
                     <img src="{{$event->image_path}}" alt="" class="w-full h-auto rounded-t-lg mb-4">
                     <div class="mb-4">
                         <!-- Event Follow Button -->

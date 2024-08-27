@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Event;
-use App\Follow;
+use App\Models\Event;
 
 class FollowerController extends Controller
 {

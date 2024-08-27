@@ -1,86 +1,117 @@
 @include('header')
-        <div id="show"></div>
-         <div id="app">
-          <edit-profile :user="{{$user}}"></edit-profile>
-      <header class="header" data-type="background" data-speed="7" style="background: linear-gradient(to right bottom, rgba(42, 43, 88, 0.9), rgba(42, 43, 88, 0.9)), url('{{$user->backimg}}');
-          background-size: cover;
-                background-attachment: fixed;
-  background-position:center;">
-    <div class="header_bg">  
-               <div class="header_text-box">
-            <h1 class="heading-primary">
-                 <span class="heading-primary_sub">Welcome </span>
-                <span class="heading-primary_main">{{$user->name}}</span>
-              </h1>
-              <p class="header-para">This is your profile page. You can see the progress you've made 
-              with your work and manage your projects or assigned tasks</p>
-              @can('update', $user)
-         <button class="btn btn-info header-btn" @click="$modal.show('EditProfile')">Edit Profile</button>  
-         @endcan
-    </div>
-        </div>
-    </header>
-    <div class="container">
-        <div class="row mt-5">
-                       <div class="col-md-4">
-                <div class="user-profile">
-                 <avatar-form :user="{{$user}}"></avatar-form>
-                <div class="row user-profile_info">
-                        <div class="col-sm-4"><span><b>{{$user->events->count()}}</b></span><br><span>Events</span></div>
-                        <div class="col-sm-4"><span><b>{{$user->replies->count()}}</b></span><br><span>Comments</span></div>
-                        <div class="col-sm-4"><span><b>{{$user->tickets->sum('qty')}}</b></span><br><span>Tickets</span></div>
-                    </div>
-                    <p><h5>{{$user->name}}</h5></p>
-                    <p>{{$user->email}}</p>
-                    <p>{{$user->created_at->diffforHumans()}}</p>
-                </div>
-            </div>
-            
-            <div class="col-md-8">
-              <div class="profile-activity">
-               <h3>Activity feed</h3>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis aut cupiditate fugit deleniti voluptatem, fugiat, architecto tempore nesciunt! Id distinctio nam quod atque voluptatum ipsam error odio, tempore similique alias quia eaque, aspernatur unde ipsum earum incidunt sunt laborum blanditiis magni doloribus molestias. Esse, dolor, accusamus. Nostrum nulla exercitationem veritatis eum iure atque eaque blanditiis, animi quas magni! Placeat ratione facilis at totam blanditiis, reiciendis tempore nihil perspiciatis, dolorem pariatur ad corporis accusantium impedit distinctio ab consequuntur libero nisi laudantium vitae aliquid, enim quam quos molestiae. Velit recusandae aperiam eligendi cupiditate hic vitae quis ullam, itaque suscipit. Eligendi deleniti, repudiandae.
-              <div class="event-ticket">
-                <p class="event-ticket_heading">You are Member of these events</p>
-                <div class="row">
-                @if($user->tickets->count()==0)
-                    <h3 class="text-center mb-4 ml-2">Sorry! No Event Found</h3>
-                    <h3 class="text-center mb-3 ml-2"><i><a href="/events">Haven't Decided to join any event view all events</a></i></h3>
-                @else
-                @foreach($user->tickets as $ticket)
-                <div class="col-lg-6 col-md-12">
-                    <a href="/events/{{$ticket->event->slug}}" target="_blank">
-                    <div class="event-ticket_single">
-                      <div class="row">
-                    <div class="col-sm-3">
-                        <img src="{{$ticket->event->image_path}}" alt="" class="event-ticket_img">
-                        @if($ticket->event->enddt > \Carbon\Carbon::now()->toDateTimeString())
-                      <span class="badge badge-success">{{$ticket->event->strtdt->diffforHumans()}}</span>
-                    @else
-                    <span class="badge badge-danger">{{$ticket->event->strtdt->diffforHumans()}}</span>
-                    @endif
-                        <p><b>Qty:{{$ticket->qty}}</b></p>
-                        <p><b>Amount:${{$ticket->total}}</b></p>
-                    </div>
-                    <div class="col-sm-9">
-                       <div class="event-ticket_single-detail">
-                        <p class="event-ticket_single-name">{!!substr(strip_tags($ticket->event->name), 0, 28)!!}</p>
-                           <p><b>Start At:{{$ticket->event->StartDate}}</b></p>
-                           <p><b>Purchsed At:{{$ticket->created_at}}</b></p>
+<div id="show"></div>
+<div id="app">
+  <!-- <edit-profile :user="{{ $user }}"></edit-profile> -->
 
-                        </div>
-                    </div>
-                </div>
-                </div>
-             </a>
-                </div>
-                
-         @endforeach 
-        @endif         
-                  </div>
-              </div>
-            </div>
-        </div>
-             </div>
+  <!-- Header Section -->
+  <header
+    class="relative bg-cover bg-fixed bg-center text-white py-20"
+    style="background-image: linear-gradient(to right bottom, rgba(42, 43, 88, 0.9), rgba(42, 43, 88, 0.9)), url('{{ $user->backimg }}');"
+  >
+    <div class="text-center">
+      <h1 class="text-4xl font-bold">
+        <span class="block text-2xl">Welcome</span>
+        <span class="block">{{ $user->name }}</span>
+      </h1>
+      <p class="mt-4 text-lg">
+        This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks.
+      </p>
+      <!-- @can('update', $user) -->
+      <!-- <button
+        class="mt-6 px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-full"
+        @click="$modal.show('EditProfile')"
+      >
+        Edit Profile
+      </button> -->
+      <edit-profile :user="{{ $user }}"></edit-profile>
+      <!-- @endcan -->
     </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container mx-auto my-10">
+    <div class="flex flex-wrap -mx-4">
+      <!-- Profile Sidebar -->
+      <div class="w-full md:w-1/3 px-4 mb-8 md:mb-0">
+        <div class="bg-white rounded-lg shadow p-6">
+          <avatar-form :user="{{ $user }}"></avatar-form>
+
+          <!-- <user-avatar
+  :avatar="user.avatar"
+  :can-update="userCanUpdate"
+  @file-change="handleFileChange"
+/> -->
+
+          <div class="flex justify-between mt-4">
+            <div class="text-center">
+              <span class="block text-xl font-bold">{{ $user->events->count() }}</span>
+              <span class="text-sm text-gray-500">Events</span>
+            </div>
+            <div class="text-center">
+              <span class="block text-xl font-bold">{{ $user->replies->count() }}</span>
+              <span class="text-sm text-gray-500">Comments</span>
+            </div>
+            <div class="text-center">
+              <span class="block text-xl font-bold">{{ $user->tickets->sum('qty') }}</span>
+              <span class="text-sm text-gray-500">Tickets</span>
+            </div>
+          </div>
+          <div class="mt-6">
+            <h5 class="text-lg font-semibold">{{ $user->name }}</h5>
+            <p class="text-gray-700">{{ $user->email }}</p>
+            <p class="text-gray-500 text-sm">{{ $user->created_at->diffForHumans() }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Profile Activity -->
+      <div class="w-full md:w-2/3 px-4">
+        <div class="bg-white rounded-lg shadow p-6">
+          <h3 class="text-2xl font-semibold mb-4">Activity Feed</h3>
+          <p class="text-gray-700">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis aut cupiditate fugit deleniti voluptatem, fugiat, architecto tempore nesciunt!
+          </p>
+          <div class="mt-8">
+            <p class="font-semibold text-lg">You are a Member of these Events</p>
+            <div class="flex flex-wrap -mx-4 mt-4">
+              @if($user->tickets->count() == 0)
+              <div class="text-center w-full">
+                <h3 class="text-xl mb-4">Sorry! No Event Found</h3>
+                <a href="/events" class="text-blue-600 hover:underline">Haven't decided to join any event? View all events</a>
+              </div>
+              @else
+              @foreach($user->tickets as $ticket)
+              <div class="w-full lg:w-1/2 px-4 mb-6">
+                <a href="/events/{{ $ticket->event->slug }}" target="_blank">
+                  <div class="bg-gray-100 rounded-lg shadow p-4 hover:bg-gray-200">
+                    <div class="flex">
+                      <div class="w-1/3">
+                        <img src="{{ $ticket->event->image_path }}" alt="" class="rounded-lg">
+                        <span class="block mt-2 px-2 py-1 text-xs rounded-full text-white {{ $ticket->event->enddt > \Carbon\Carbon::now()->toDateTimeString() ? 'bg-green-600' : 'bg-red-600' }}">
+                          {{ $ticket->event->strtdt->diffForHumans() }}
+                        </span>
+                        <p class="mt-2 text-sm"><b>Qty: {{ $ticket->qty }}</b></p>
+                        <p class="text-sm"><b>Amount: ${{ $ticket->total }}</b></p>
+                      </div>
+                      <div class="w-2/3 pl-4">
+                        <p class="text-lg font-semibold">
+                          {!! substr(strip_tags($ticket->event->name), 0, 28) !!}
+                        </p>
+                        <p class="text-gray-600 text-sm"><b>Start At: {{ $ticket->event->StartDate }}</b></p>
+                        <p class="text-gray-500 text-sm"><b>Purchased At: {{ $ticket->created_at }}</b></p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              @endforeach
+              @endif
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 @include('footer')

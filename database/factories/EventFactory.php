@@ -6,6 +6,7 @@ use App\Models\Topic;
 use App\Models\User;
 use Illuminate\Container\Attributes\Storage;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Storage as FacadesStorage;
 use Illuminate\Support\Str;
 
 /**
@@ -34,7 +35,8 @@ class EventFactory extends Factory
             'topic_id' => Topic::factory(),
             'price' => 100,
             'qty' => 100,
-            'image_path' => storage_path('event/placeholder.jpg')
+            'image_path' =>  FacadesStorage::url('event/placeholder.png')
+            //  FacadesStorage::path('event/placeholder.jpg')
         ];
     }
 }

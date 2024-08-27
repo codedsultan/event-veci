@@ -1,13 +1,25 @@
 <template>
-    <div class="user-profile_img img-responsive">
-      <img :src="avatar" alt="" @click="viewImage" class="img-responsive">
-      <form v-if="canUpdate" method="POST" enctype="multipart/form-data">
-        <div class="fileUpload btn btn-avatar file">
-          <label class="upload">
-            <input name="avatar" type="file" accept="image/*" @change="onFileChange">
-            <i class="fas fa-camera"></i> Update Image
-          </label>
-        </div>
+    <div class="user-profile-img relative w-40 h-40 mx-auto mt-4">
+      <!-- User Avatar -->
+      <img
+        :src="avatar"
+        alt="User Avatar"
+        @click="viewImage"
+        class="w-full h-full object-cover rounded-full cursor-pointer border-2 border-gray-300 hover:border-blue-500 transition-all duration-300"
+      />
+
+      <!-- Upload Form -->
+      <form v-if="canUpdate" method="POST" enctype="multipart/form-data" class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-full opacity-0 hover:opacity-100 transition-opacity duration-300">
+        <label class="flex items-center justify-center w-12 h-12 bg-blue-500 text-white rounded-full cursor-pointer hover:bg-blue-600">
+          <input
+            name="avatar"
+            type="file"
+            accept="image/*"
+            @change="onFileChange"
+            class="hidden"
+          />
+          <i class="fas fa-camera"></i>
+        </label>
       </form>
     </div>
   </template>
