@@ -169,7 +169,7 @@
                             <!-- <div class="hidden md:block items-center  lg:w-1/6 lg:justify-end uppercase"> -->
                             @auth
                             <bell-notifications ></bell-notifications>
-                            <profile-dropdown v-cloak>
+                            <profile-dropdown :user="{{ Auth::user() }}" v-cloak>
                                 <template v-slot:trigger>
                                             {!!substr(strip_tags(Auth::user()->name ), 0, 10)!!}
 
