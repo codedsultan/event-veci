@@ -2,14 +2,17 @@
 
 namespace App\Functions;
 
-use App\Event;
-use App\PurchaseTicket;
-use App\Topic;
+use App\Models\Event;
+use App\Models\PurchaseTicket;
+use App\Models\Topic;
 use App\Models\User;
 use Carbon\Carbon;
-use DB;
+
 use Illuminate\Http\Request;
-use Newsletter;
+use Illuminate\Support\Facades\DB;
+use Spatie\Newsletter\Facades\Newsletter;
+
+// use Newsletter;
 
 class DashBoard
 {

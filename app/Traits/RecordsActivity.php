@@ -2,10 +2,11 @@
 
 // RecordsActivity.php
 
-namespace App\Models;
+namespace App\Traits;
 
 use App\Events\ActivityLogged;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use ReflectionClass;
 
 trait RecordsActivity
@@ -51,7 +52,7 @@ trait RecordsActivity
             'link' => $this->getActivityLink($this, $event),
             'title' => $this->getActivityTitle($this, $event),
             'changes' => $this->activityChanges(),
-            'user_id' =>auth()->id()
+            'user_id' => Auth::id()
         ]);
 
         event(new ActivityLogged($activity));

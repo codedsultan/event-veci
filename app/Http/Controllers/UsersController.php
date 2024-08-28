@@ -90,7 +90,7 @@ class UsersController extends Controller
             'avatar'=>['required', 'image']
         ]);
 
-        $user = Auth::user();
+        $user = $request->user();
         $file = $request->file('avatar');
         $filename = uniqid($user->id.'_').'.'.$file->getClientOriginalExtension();
         Storage::disk('s3')->put($filename, File::get($file), 'public');

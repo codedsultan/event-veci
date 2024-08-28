@@ -3,12 +3,14 @@
 namespace App\Models;
 
 use App\Notifications\ReplyHasAdded;
+use App\Traits\RecordsActivity;
 use Carbon\Carbon;
 use Database\Factories\EventFactory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Searchable\Searchable;
 use Spatie\Searchable\SearchResult;
 use Illuminate\Support\Str;
@@ -116,7 +118,7 @@ class Event extends Model implements Searchable
     public function follow($userId = null)
     {
         $this->followers()->create([
-            'user_id'=>$userId ?: auth()->id()
+            'user_id'=>$userId ?:  Auth::id()
         ]);
 
         return $this;
@@ -124,13 +126,13 @@ class Event extends Model implements Searchable
 
     public function unfollow($userId = null)
     {
-        $this->followers()->where('user_id', $userId ?: auth()->id())->delete();
+        $this->followers()->where('user_id', $userId ?:  Auth::id())->delete();
     }
 
     public function getIsFollowedToAttribute()
     {
         return  $this->followers()
-            ->where('user_id', auth()->id())
+            ->where('user_id',  Auth::id())
             ->exists();
     }
 

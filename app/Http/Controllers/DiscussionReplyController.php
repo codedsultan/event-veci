@@ -16,7 +16,7 @@ class DiscussionReplyController extends Controller
         ]);
         $reply->addDiscussionReply([
             'replybody'=>request('replybody'),
-            'user_id'=>auth()->id()
+            'user_id'=> $request()->user()->id()
         ]);
     }
 
