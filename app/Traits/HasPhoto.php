@@ -4,7 +4,7 @@ namespace App\Traits;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\URL;
-// use Intervention\Image\Facades\Image;
+use Intervention\Image\Facades\Image;
 // use Intervention\Image\Image;
 // use Intervention\Image\ImageManager as Image;
 use Illuminate\Support\Facades\Storage;

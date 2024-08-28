@@ -124,7 +124,7 @@ class EventsController extends Controller
 
         $event = Event::create([
             'name'=>$request->name,
-            'user_id'=>auth()->id(),
+            'user_id'=> $request()->user()->id(),
             'desc'=>$request->desc,
             'strtdt'=>$request->strtdt,
             'enddt'=>$request->enddt,

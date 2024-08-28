@@ -26,7 +26,7 @@ class ReplyController extends Controller
         ]);
         $event->addReply([
             'body'=>request('body'),
-            'user_id'=>auth()->id()
+            'user_id'=> $request()->user()->id()
         ]);
 
         if (request()->wantsJson()) {
