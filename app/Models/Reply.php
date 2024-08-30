@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Notifications\ReplyAddedToDiscussion;
+use App\Traits\RecordsActivity;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 

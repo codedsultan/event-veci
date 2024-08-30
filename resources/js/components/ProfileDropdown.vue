@@ -42,7 +42,8 @@ import { ChevronDownIcon } from '@heroicons/vue/20/solid'
       required: true,
     },
   });
-  const avatar = ref(props.user.profile);
+//   const avatar = ref(props.user.profile);
+  const avatar = ref(props.user.gravatar);
   // Reactive state
   const isOpen = ref(false);
   const userNavigation = [

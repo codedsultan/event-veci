@@ -156,17 +156,23 @@
                 </div>
 
                 <!-- Event Organizer -->
-                <div class="px-4 text-left mt-4 single-event_organize">
-                    <h5><b>Organizer</b></h5>
-                    <p><a href="/profile/{{$event->user->id}}" target="_blank"><span><img src="{{$event->user->avatar_path}}" alt=""></span><span> <b>{{$event->user->name}}</b></span></a>
-                    @if(Auth::user())
-                    <span class="float-right">
-                    <contact-form :event="{{$event}}"></contact-form>
-                    </span>
-                    @endif
+                <div class="px-4 text-left mt-4">
+                    <h5 class="font-bold text-lg mb-2">Organizer</h5>
+                    <p class="flex items-center justify-between space-x-3">
+                        <a href="/profile/{{$event->user->id}}" target="_blank" class="flex items-center space-x-2">
+                            <img src="{{$event->user->gravatar}}" alt="" class="w-10 h-10 rounded-full">
+                            <span class="font-semibold text-base text-gray-800">{{$event->user->name}}</span>
+                        </a>
+                        @if(Auth::user())
+                        <span class="ml-auto">
+                            <contact-form :event="{{$event}}"></contact-form>
+                        </span>
+                        @endif
                     </p>
                 </div>
-                <div id="map"></div>
+                <div id="map">
+
+                </div>
                 <!-- Event Add to calender-->
                 <div title="Add to Calendar" class="addeventatc mt-3">
                     Add to Calendar
