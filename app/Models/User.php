@@ -174,7 +174,7 @@ class User extends Authenticatable
 
     public function gravatar(): Attribute
     {
-        return Attribute::get(fn () => CreateAvatar::run($this->first_name, $this->email, null, null, 'lorelei'));
+        return Attribute::get(fn () => CreateAvatar::run($this->name, $this->email, null, null, 'initials'));
     }
 }
 

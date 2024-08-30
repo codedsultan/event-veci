@@ -174,15 +174,16 @@ class EventsController extends Controller
 
         //google geocode map
         $googleClient = new GuzzleClient();
-        // $response = $googleClient->get('https://maps.googleapis.com/maps/api/geocode/json', [
-        //     'query'=>[
-        //         'address'=>$event->location,
-        //         //'key'=>env('MAP_KEY'),
-        //         'key'=>'AIzaSyAorsjtV7VJRlduybX8UoWYrD9SaRKWX7A',
-        //     ]
-        // ]);
-        // $googleBody = json_decode($response->getBody());
-        // $coords = $googleBody->results[0]->geometry->location;
+        $response = $googleClient->get('https://maps.googleapis.com/maps/api/geocode/json', [
+            'query'=>[
+                'address'=>$event->location,
+                'key'=>env('MAP_KEY'),
+                // 'key'=>'AIzaSyAorsjtV7VJRlduybX8UoWYrD9SaRKWX7A',
+            ]
+        ]);
+        $googleBody = json_decode($response->getBody());
+        // dd($googleBody);
+        $coords = $googleBody->results[0]->geometry->location;
 
         return view('event.show', [
             'events'=>$events,
@@ -190,8 +191,8 @@ class EventsController extends Controller
             'replies'=>$replies,
             'related_events'=>$related_events,
             'guests'=>$guests,
-            // 'lng'=>$coords->lng,
-            // 'lat'=>$coords->lat
+            'lng'=>$coords->lng,
+            'lat'=>$coords->lat
         ]);
     }
 
