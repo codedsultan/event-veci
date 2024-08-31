@@ -16,6 +16,7 @@ use App\Http\Controllers\DiscussionReplyController;
 use App\Http\Controllers\FrontEndController;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\FollowerController;
+use App\Http\Controllers\FullCalenderController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\ReplyController;
@@ -85,3 +86,6 @@ Route::prefix('discussion')->group(function () {
 // Route::post('/events/{event}/follow', 'FollowerController@follow');
 // Route::delete('/events/{event}/follow', 'FollowerController@unfollow');
 Route::post('/subscribe', [FrontEndController::class,'subscribe']);
+
+
+Route::get('/fullcalendar', [FullCalenderController::class,'view']);

@@ -172,11 +172,13 @@ class EventsController extends Controller
             $q1->where('event_id', $eventId);
         })->get();
 
+        // dd($event->location);
         //google geocode map
         $googleClient = new GuzzleClient();
         $response = $googleClient->get('https://maps.googleapis.com/maps/api/geocode/json', [
             'query'=>[
-                'address'=>$event->location,
+                'address'=> $event->location,
+                // '41 industrial avenue,sabo,yaba',
                 'key'=>env('MAP_KEY'),
                 // 'key'=>'AIzaSyAorsjtV7VJRlduybX8UoWYrD9SaRKWX7A',
             ]
