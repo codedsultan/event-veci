@@ -170,7 +170,7 @@
                         @endif
                     </p>
                 </div>
-                <div id="map">
+                <div id="map" style="height: 100%; width: 100%; position: fixed !important;">
 
                 </div>
                 <!-- Event Add to calender-->

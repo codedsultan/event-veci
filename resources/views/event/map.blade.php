@@ -11,20 +11,26 @@ src="https://maps.googleapis.com/maps/api/js?key={{env('MAP_KEY')}}&loading=asyn
             document.getElementById('map'), {zoom: 11, center: uluru});
         // The marker, positioned at Uluru
         var marker = new google.maps.Marker({position: uluru, map: map});
+        // Create an AdvancedMarkerElement
+        // const markerElement = new google.maps.marker.AdvancedMarkerElement({
+        //         map: map,
+        //         position: uluru,
+        //         title: "Uluru", // Optional title
+        //         content: document.createElement('div'), // Custom HTML content
+        //     });
+
+        //     // Custom styling and content for the marker
+        //     markerElement.content.innerHTML = '<div style="background: red; padding: 8px; border-radius: 4px;">My Custom Marker</div>';
     }
 </script>
 <style>
-       /* Set the size of the div element that contains the map */
-       #map {
-    /* height: 250px;  The height is 400 pixels */
-    /* width: 100%;  The width is the width of the web page */
-    position: fixed !important;
-    height: 100% !important;
-    width: 100% !important;
-    overflow: visible !important;
 
-}
-    </style>
+/* #map {
+    height: 100vh;
+    width: 100vw;
+    position: fixed !important;
+} */
+</style>
 
 
 <!-- <div> -->
