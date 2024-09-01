@@ -1,95 +1,92 @@
 <template>
     <div>
-      <div v-if="authorize('isAdmin')">
-        <p class="Dashboard-heading">DashBoard</p>
-        <div class="info">
-          <div class="row">
-            <div class="col-md-3 text-center col-sm-6" v-for="(item, index) in infoItems" :key="index">
-              <div class="row info-row">
-                <div class="col-sm-9 info-right">
-                  <span class="info-right_name">{{ item.title }}</span>
-                  <span class="info-right_name">{{ item.subtitle }}</span>
-                  <br>
-                  <span class="info-right_count">{{ item.count }}</span>
-                  <br>
-                  <span class="info-right_name">This Month</span>
-                  <span class="float-right">
-                    <b>{{ item.monthCount }}</b>
-                    <span class="float-right ml-2" :class="{'active': item.ratio > 0, 'shake': item.ratio < 0}">
-                      {{ item.ratio }}%
-                      <i :class="{'fas fa-arrow-up': item.ratio > 0, 'fas fa-arrow-down': item.ratio < 0}"></i>
+        <div v-if="authorize('isAdmin')">
+            <p class="text-2xl font-semibold mb-4">Dashboard</p>
+
+            <div class="info">
+            <div class="flex flex-wrap -mx-4">
+                <div class="w-full sm:w-1/2 md:w-1/4 px-4 mb-4 text-center" v-for="(item, index) in infoItems" :key="index">
+                <div class="flex bg-white shadow-md rounded-lg overflow-hidden">
+                    <div class="w-3/4 p-4 text-left">
+                    <span class="block font-semibold text-lg">{{ item.title }}</span>
+                    <span class="block text-gray-500">{{ item.subtitle }}</span>
+                    <br>
+                    <span class="block text-2xl font-bold">{{ item.count }}</span>
+                    <br>
+                    <span class="block text-sm">This Month</span>
+                    <span class="float-right">
+                        <b>{{ item.monthCount }}</b>
+                        <span class="ml-2" :class="{'text-green-500': item.ratio > 0, 'text-red-500 animate-shake': item.ratio < 0}">
+                        {{ item.ratio }}%
+                        <i :class="{'fas fa-arrow-up': item.ratio > 0, 'fas fa-arrow-down': item.ratio < 0}"></i>
+                        </span>
                     </span>
-                  </span>
+                    </div>
+                    <div class="w-1/4 bg-gray-100 flex items-center justify-center p-4">
+                    <i :class="item.iconClass" class="text-3xl"></i>
+                    </div>
                 </div>
-                <div class="col-sm-3 info-left">
-                  <i :class="item.iconClass" class="info-left_icon"></i>
                 </div>
-              </div>
             </div>
-          </div>
-        </div>
+            </div>
 
-        <div class="row mt-5">
-          <div class="col-md-12 col-lg-6">
-            <div v-if="ticketChart">
-              <span class="float-right">
-                <button class="btn btn-primary btn-sm" disabled>Month</button>
-                <button class="btn-primary btn btn-sm" @click="toggleChart('ticketChart', false)">Year</button>
-              </span>
-              <div class="float-left">
+            <!-- Charts -->
+            <div class="flex flex-wrap -mx-4 mt-8">
+            <div class="w-full lg:w-1/2 px-4 mb-8">
+                <div v-if="ticketChart">
+                <div class="flex justify-end mb-2">
+                    <button class="btn btn-primary btn-sm mr-2" disabled>Month</button>
+                    <button class="btn btn-primary btn-sm" @click="toggleChart('ticketChart', false)">Year</button>
+                </div>
                 <MonthChart />
-              </div>
-            </div>
-            <div v-else>
-              <span class="float-right">
-                <button class="btn btn-primary btn-sm" @click="toggleChart('ticketChart', true)">Month</button>
-                <button class="btn-primary btn btn-sm" disabled>Year</button>
-              </span>
-              <div class="float-left">
+                </div>
+                <div v-else>
+                <div class="flex justify-end mb-2">
+                    <button class="btn btn-primary btn-sm mr-2" @click="toggleChart('ticketChart', true)">Month</button>
+                    <button class="btn btn-primary btn-sm" disabled>Year</button>
+                </div>
                 <YearChart />
-              </div>
+                </div>
             </div>
-          </div>
-          <div class="col-md-12 col-lg-6">
-            <div v-if="salesChart">
-              <span class="float-right">
-                <button class="btn btn-primary btn-sm" disabled>Month</button>
-                <button class="btn-primary btn btn-sm" @click="toggleChart('salesChart', false)">Year</button>
-              </span>
-              <div class="float-left">
+
+            <div class="w-full lg:w-1/2 px-4 mb-8">
+                <div v-if="salesChart">
+                <div class="flex justify-end mb-2">
+                    <button class="btn btn-primary btn-sm mr-2" disabled>Month</button>
+                    <button class="btn btn-primary btn-sm" @click="toggleChart('salesChart', false)">Year</button>
+                </div>
                 <MonthSaleChart />
-              </div>
-            </div>
-            <div v-else>
-              <span class="float-right">
-                <button class="btn btn-primary btn-sm" @click="toggleChart('salesChart', true)">Month</button>
-                <button class="btn-primary btn btn-sm" disabled>Year</button>
-              </span>
-              <div class="float-left">
+                </div>
+                <div v-else>
+                <div class="flex justify-end mb-2">
+                    <button class="btn btn-primary btn-sm mr-2" @click="toggleChart('salesChart', true)">Month</button>
+                    <button class="btn btn-primary btn-sm" disabled>Year</button>
+                </div>
                 <YearSaleChart />
-              </div>
+                </div>
             </div>
-          </div>
-        </div>
+            </div>
 
-        <div class="row mt-5">
-          <div class="col-md-12">
+            <!-- Activity Feed -->
+            <div class="mt-8">
             <ActivityFeed />
-          </div>
+            </div>
+
+            <!-- Information Section -->
+            <div class="mt-8">
+            <p class="text-center text-gray-600">
+                "DreamEvent is a Laravel Vue.js based Event Application built for portfolio purpose. You can find its source code on
+                <a href="https://github.com/hamza094/Dream" target="_blank" class="text-blue-500 underline">GitHub</a>. Built by
+                <a href="https://hikportfolio.herokuapp.com/" target="_blank" class="text-blue-500 underline">Hamza Ikram</a> &copy; 2020 All Rights Reserved!"
+            </p>
+            </div>
         </div>
 
-        <div class="row">
-          <div class="col-md-12 mt-4">
-            <p class="dashboard-para">
-              "DreamEvent is a Laravel Vue.js based Event Application built for portfolio purpose. You can find its source code on <a href="https://github.com/hamza094/Dream" target="_blank">GitHub</a>. Built by <a href="https://hikportfolio.herokuapp.com/" target="_blank">Hamza Ikram</a> &copy; 2020 All Rights Reserved!"
-            </p>
-          </div>
+    <!-- Non-Admin Access -->
+        <div v-else class="text-center mt-16">
+            <h2 class="text-2xl font-semibold mt-5">Only Admin Can Access Dashboard</h2>
+            <a href="/" class="btn btn-primary mt-4">Go Back</a>
         </div>
-      </div>
-      <div v-else class="text-center mt-5">
-        <h2 class="mt-5">Only Admin Can Access Dashboard</h2>
-        <a href="/" class="btn btn-primary mt-2">Go Back</a>
-      </div>
     </div>
   </template>
   <script setup>

@@ -1,56 +1,64 @@
 <template>
     <div v-if="authorize('isAdmin')">
-      <p class="Dashboard-heading">Users</p>
-      <p class="Dashboard-heading">Total Users:</p>
-      <div class="form-group row">
-        <div class="col-sm-4">
-          <input
-            type="text"
-            class="form-control"
-            id="user"
-            v-model="search"
-            placeholder="Search User"
-            @keyup="searchIt"
-          />
-        </div>
-      </div>
-      <div class="table-responsive">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th scope="col">SrNo</th>
-              <th scope="col">User Name</th>
-              <th scope="col">Email Address</th>
-              <th scope="col">Related Events</th>
-              <th scope="col">Account Created At</th>
-              <th scope="col">Option</th>
+    <!-- Heading Section -->
+    <p class="text-2xl font-bold mb-4">Users</p>
+    <p class="text-lg font-semibold mb-4">Total Users:</p>
+
+    <!-- Search Input -->
+    <div class="mb-6">
+        <input
+        type="text"
+        class="form-input w-full sm:w-1/3 border-gray-300 rounded-md shadow-sm"
+        id="user"
+        v-model="search"
+        placeholder="Search User"
+        @keyup="searchIt"
+        />
+    </div>
+
+    <!-- Users Table -->
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white shadow-md rounded-lg">
+        <thead>
+            <tr class="bg-gray-200 text-gray-700">
+            <th scope="col" class="py-2 px-4 text-left">SrNo</th>
+            <th scope="col" class="py-2 px-4 text-left">User Name</th>
+            <th scope="col" class="py-2 px-4 text-left">Email Address</th>
+            <th scope="col" class="py-2 px-4 text-center">Related Events</th>
+            <th scope="col" class="py-2 px-4 text-left">Account Created At</th>
+            <th scope="col" class="py-2 px-4 text-left">Option</th>
             </tr>
-          </thead>
-          <tbody>
-            <tr v-for="user in users.data" :key="user.id">
-              <td><b>{{ user.id }}</b></td>
-              <td>
-                <a :href="'profile/' + user.id" class="text-user" target="_blank">
-                  {{ user.name }}
-                  <span v-if="user.isAdmin" class="badge badge-primary">Admin</span>
+        </thead>
+        <tbody>
+            <tr v-for="user in users.data" :key="user.id" class="border-b hover:bg-gray-100">
+            <td class="py-2 px-4"><b>{{ user.id }}</b></td>
+            <td class="py-2 px-4">
+                <a :href="'profile/' + user.id" class="text-blue-500 hover:underline" target="_blank">
+                {{ user.name }}
+                <span v-if="user.isAdmin" class="ml-2 inline-block px-2 py-1 text-xs font-semibold text-white bg-blue-500 rounded">Admin</span>
                 </a>
-              </td>
-              <td>{{ user.email }}</td>
-              <td class="text-center">{{ user.events.length }}</td>
-              <td>{{ user.created_at | timeExactDate }}</td>
-              <td>
-                <button class="btn btn-sm btn-danger" @click="deleteUser(user.id)">Delete</button>
-              </td>
+            </td>
+            <td class="py-2 px-4">{{ user.email }}</td>
+            <td class="py-2 px-4 text-center">{{ user.events.length }}</td>
+            <td class="py-2 px-4">{{ user.created_at | timeExactDate }}</td>
+            <td class="py-2 px-4">
+                <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded text-sm" @click="deleteUser(user.id)">Delete</button>
+            </td>
             </tr>
-          </tbody>
+        </tbody>
         </table>
-      </div>
-      <pagination :data="users" @pagination-change-page="getResults"></pagination>
     </div>
-    <div v-else class="text-center mt-5">
-      <h2 class="mt-5">Only Admin Can Access Dashboard</h2>
-      <a href="/" class="btn btn-primary mt-2">Go Back</a>
+
+    <!-- Pagination -->
+    <pagination :data="users" @pagination-change-page="getResults" class="mt-4"></pagination>
     </div>
+
+    <!-- Non-Admin Access -->
+    <div v-else class="text-center mt-16">
+    <h2 class="text-2xl font-semibold mt-5">Only Admin Can Access Dashboard</h2>
+    <a href="/" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 inline-block">Go Back</a>
+    </div>
+
   </template>
 
   <script setup>
