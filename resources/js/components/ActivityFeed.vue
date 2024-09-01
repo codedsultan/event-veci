@@ -1,27 +1,38 @@
 <template>
-  <div>
-    <div class="card">
-      <!-- Default panel contents -->
-      <div class="card-header bg-success text-center text-white">
-        <h5><i>Recent Activities</i></h5>
-      </div>
+    <div>
+    <div class="bg-white shadow-md rounded-lg overflow-hidden">
+        <!-- Panel Header -->
+        <div class="bg-green-500 text-center text-white py-4">
+        <h5 class="text-lg font-semibold italic"><i>Recent Activities</i></h5>
+        </div>
 
-      <ul class="list-group feed">
-        <li v-if="!feeds.length">No activities available</li>
-        <li class="list-group-item" v-for="feed in feeds" :key="feed.id">
-          <a :href="'/profile/' + feed.user.id" target="_blank">
-            <img :src="feed.user.profile" alt="" class="feed-img" />
-            {{ feed.user.name }}
-          </a>
-          {{ feed.description }}
-          <a :href="feed.link" target="_blank">{{ feed.title }}</a>
-          <span class="pull-right ml-2">
-            <i><b>{{ feed.lapse }}</b></i>
-          </span>
+        <!-- Activity Feed List -->
+        <ul class="divide-y divide-gray-200">
+        <li v-if="!feeds.length" class="p-4 text-center text-gray-500">
+            No activities available
         </li>
-      </ul>
+        <li class="p-4 flex items-center" v-for="feed in feeds" :key="feed.id">
+            <!-- User Profile Link -->
+            <a :href="'/profile/' + feed.user.id" target="_blank" class="flex-shrink-0">
+            <img :src="feed.user.profile" alt="User profile image" class="w-12 h-12 rounded-full object-cover mr-4" />
+            </a>
+            <div class="flex-grow">
+            <!-- Feed Description -->
+            <a :href="'/profile/' + feed.user.id" target="_blank" class="font-medium text-gray-900 hover:underline">
+                {{ feed.user.name }}
+            </a>
+            <span class="text-gray-600">{{ feed.description }}</span>
+            <!-- Feed Title Link -->
+            <a :href="feed.link" target="_blank" class="text-blue-500 hover:underline ml-1">{{ feed.title }}</a>
+            </div>
+            <!-- Time Lapse -->
+            <span class="ml-4 text-gray-500">
+            <i><b>{{ feed.lapse }}</b></i>
+            </span>
+        </li>
+        </ul>
     </div>
-  </div>
+    </div>
 </template>
 
 <script>
